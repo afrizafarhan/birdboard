@@ -1,0 +1,27 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+// @import '~bootstrap/scss/bootstrap';
+
+
+.card {
+    @apply bg-white p-5 rounded-lg shadow-sm;
+}
+
+.c-bg-blue{
+    background-color: #47cdff;
+}
+
+.border-blue-light{
+    border-color: #8ae2fe;
+}
