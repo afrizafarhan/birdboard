@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProjectRequest;
+use App\Http\Requests\ProjectUpdateRequest;
 use App\Models\Project;
 use Illuminate\Http\Request;
 
@@ -20,15 +21,15 @@ class ProjectController extends Controller
 
     public function show(Project $project)
     {
-        if(auth()->user()->isNot($project->owner)) abort(403);
+        $this->authorize('update', $project);
 
         return view('projects.show', ['project' => $project]);
     }
 
-    public function store()
+    public function store(ProjectRequest $request)
     {
-        $project = auth()->user()->projects()->create($this->validateRequest());
-
+        $project = auth()->user()->projects()->create($request->validated());
+        
         return redirect($project->path());
     }
 
@@ -37,21 +38,10 @@ class ProjectController extends Controller
         return view('projects.edit', ['project' => $project]);
     }
 
-    public function update(Project $project)
+    public function update(ProjectUpdateRequest $request,Project $project)
     {
-        $this->authorize('update', $project);
-
-        $project->update($this->validateRequest());
+        $project->update($request->validated());
 
         return redirect($project->path());
-    }
-
-    protected function validateRequest()
-    {
-        return request()->validate([
-            'title' => 'required',
-            'descriptions' => 'required',
-            'notes' => 'min:3'
-        ]);
     }
 }

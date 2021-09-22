@@ -15,4 +15,8 @@ class ProjectPolicy
     {
         return $user->is($project->owner);
     }
+
+    public function store(User $user){
+        return $user;
+    }
 }

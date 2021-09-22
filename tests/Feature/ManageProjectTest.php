@@ -25,7 +25,6 @@ class ManageProjectTest extends TestCase
             'descriptions' => $this->faker->sentence(),
             'notes' => 'General Notes.'
         ];
-
         $response = $this->post('/projects', $attributes);
 
         $project = Project::where($attributes)->first();
@@ -54,7 +53,6 @@ class ManageProjectTest extends TestCase
 
     public function test_a_projects_requires_a_title_and_a_descriptions()
     {
-
         $this->signIn();
 
         $attributes = Project::factory()->raw(['title' => '', 'descriptions' => '']);
@@ -90,5 +88,14 @@ class ManageProjectTest extends TestCase
         $this->signIn();
         $project = ProjectFactory::create();
         $this->patch($project->path())->assertStatus(403);
+    }
+
+    function test_a_user_can_update_a_project_general_notes()
+    {
+        $project = ProjectFactory::create();
+
+        $this->actingAs($project->owner)->patch($project->path(), $attributes = ['notes' => 'Changed']);
+
+        $this->assertDatabaseHas('projects', $attributes);
     }
 }
