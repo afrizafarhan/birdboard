@@ -9,11 +9,7 @@ use App\Models\Project;
 class ProjectTest extends TestCase
 {
     use RefreshDatabase;
-    /**
-     * A basic unit test example.
-     *
-     * @return void
-     */
+    
     public function test_has_a_path()
     {
         $project = Project::factory()->create();

@@ -3,7 +3,7 @@
 @section('content') 
     <header class="flex items-center mb-3 py-4">
         <p class="mr-auto text-gray-600 lg:text-lg"><a href="/projects">My Projects</a> / {{ $project->title }}</p>
-        <a href="/projects/create" class="c-bg-blue text-white font-semibold py-2 px-5 rounded">New Project</a>
+        <a href="{{ $project->path().'/edit' }}" class="button">Edit Project</a>
     </header>
 
     
@@ -41,6 +41,8 @@
                         <textarea class="card w-full mb-4" name="notes" style="min-height:200px" placeholder="Anything special that you want to make a note off?">{{ $project->notes }}</textarea>
                         <button class="c-bg-blue text-white font-semibold py-2 px-5 rounded" type="submit">Save</button>
                     </form>
+
+                    @include('errors')
                 </div>
             </div>
 
