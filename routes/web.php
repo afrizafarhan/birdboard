@@ -25,9 +25,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/projects/create', [ProjectController::class, 'create']);
     Route::post('/projects', [ProjectController::class, 'store']);
     Route::get('/projects/{project}', [ProjectController::class, 'show']);
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::patch('/projects/{project}', [ProjectController::class, 'update']);
     
     Route::post('/projects/{project}/tasks', [ProjectTaskController::class, 'store']);
+    Route::patch('/projects/{project}/tasks/{task}', [ProjectTaskController::class, 'update']);
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 });
 
 Auth::routes();

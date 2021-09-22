@@ -32,7 +32,7 @@ class ProjectTest extends TestCase
     {
         $project = Project::factory()->create();
 
-        $task = $project->addTask('Test task');
+        $task = $project->addTask(['body' => 'Test task']);
 
         $this->assertCount(1, $project->tasks);
 
