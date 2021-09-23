@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
-    use HasFactory;
+    use HasFactory,RecordActivity;
 
     protected $guarded = ['id'];
 
@@ -28,18 +28,11 @@ class Project extends Model
 
     public function activity()
     {
-        return $this->hasMany(Activity::class);
+        return $this->hasMany(Activity::class)->latest();
     }
 
     public function addTask($body)
     {
         return $this->tasks()->create($body);
-    }
-
-    public function recordActivity($type)
-    {
-        $this->activity()->create([
-            'description' => $type
-        ]);
     }
 }

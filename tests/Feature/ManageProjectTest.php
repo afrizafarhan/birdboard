@@ -73,7 +73,7 @@ class ManageProjectTest extends TestCase
     public function test_a_user_can_view_their_project()
     {
         $project = ProjectFactory::create();
-        $this->actingAs($project->owner)->get($project->path())->assertSee($project->title)->assertSee(Str::limit($project->descriptions,100));
+        $this->actingAs($project->owner)->get($project->path())->assertSee($project->title)->assertSee($project->descriptions);
     }
 
     public function test_an_authenticated_user_cannot_view_the_projecs_of_others()

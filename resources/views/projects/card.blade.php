@@ -3,6 +3,6 @@
             <a href="{{ $project->path() }}">{{ $project->title }}</a>
         </h3> 
         <div class="text-gray-400">
-            {{ Illuminate\Support\Str::limit($project->descriptions, 100) }}
+            {{ $project->descriptions }}
         </div>
     </div>
