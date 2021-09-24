@@ -16,6 +16,7 @@ class ProjectTaskController extends Controller
             'body' => 'required'
         ]);
 
+
         $project->addTask($attribute);
 
         return redirect($project->path());

@@ -20,21 +20,11 @@ class ManageProjectTest extends TestCase
 
         $this->get('/projects/create')->assertStatus(200);
 
-        $attributes = [
-            'title' => $this->faker->sentence(),
-            'descriptions' => $this->faker->sentence(),
-            'notes' => 'General Notes.'
-        ];
-        $response = $this->post('/projects', $attributes);
-
-        $project = Project::where($attributes)->first();
-
-        $response->assertRedirect($project->path());
-
-        $this->get($project->path())
-            ->assertSee($attributes['title'])
-            ->assertSee($attributes['descriptions'])
-            ->assertSee($attributes['notes']);
+        
+        $this->followingRedirects()->post('/projects', $attributes = Project::factory()->raw())
+        ->assertSee($attributes['title'])
+        ->assertSee($attributes['descriptions'])
+        ->assertSee($attributes['notes']);
     }
 
     function test_a_user_can_update_a_project()
@@ -97,5 +87,35 @@ class ManageProjectTest extends TestCase
         $this->actingAs($project->owner)->patch($project->path(), $attributes = ['notes' => 'Changed']);
 
         $this->assertDatabaseHas('projects', $attributes);
+    }
+
+    function test_unauthorized_users_cannot_delete_projects()
+    {
+        $project = ProjectFactory::create();
+        
+        $this->delete($project->path())->assertRedirect('/login');
+
+        $user = $this->signIn();
+
+        $this->delete($project->path())->assertStatus(403);
+
+        $project->invite($user);
+
+        $this->actingAs($user)->delete($project->path())->assertStatus(403);
+    }
+
+    function test_user_can_delete_a_project()
+    {
+        $project = ProjectFactory::create();
+
+        $this->actingAs($project->owner)->delete($project->path())->assertRedirect('/projects');
+
+        $this->assertDatabaseMissing('projects', $project->only('id'));
+    }
+
+    function test_user_can_see_all_projects_they_have_been_invited_to_on_their_dashboard()
+    {
+        $project = tap(ProjectFactory::create())->invite($this->signIn());
+        $this->get('/projects')->assertSee($project->title);
     }
 }

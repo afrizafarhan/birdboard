@@ -3,7 +3,22 @@
 @section('content') 
     <header class="flex items-center mb-3 py-4">
         <p class="mr-auto text-gray-600 lg:text-lg"><a href="/projects">My Projects</a> / {{ $project->title }}</p>
-        <a href="{{ $project->path().'/edit' }}" class="button">Edit Project</a>
+        <div class="flex items-center">
+            @foreach ($project->members as $member)
+                <img
+                    src="{{ gravatar_url($member->email) }}"
+                    alt="{{ $member->name }}'s avatar"
+                    class="rounded-full w-8 mr-2">
+            @endforeach
+
+            <img
+                src="{{ gravatar_url($project->owner->email) }}"
+                alt="{{ $project->owner->name }}'s avatar"
+                class="rounded-full w-8 mr-2">
+
+                <a href="{{ $project->path().'/edit' }}" class="c-bg-blue text-white font-semibold py-2 px-5 rounded">Edit Project</a>
+        </div>
+
     </header>
 
     
@@ -49,6 +64,10 @@
             <div class="lg:w-1/4 px-3">
                 @include('projects.card')
                 @include ('projects.activity.card')
+
+                @can('manage', $project)
+                    @include('projects.invite')
+                @endcan
             </div>
         </div>
     </main>

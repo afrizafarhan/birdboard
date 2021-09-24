@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ProjectInvitationController;
 use App\Http\Controllers\ProjectTaskController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,16 +22,11 @@ Route::get('/', function () {
 
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/projects', [ProjectController::class, 'index']);
-    Route::get('/projects/create', [ProjectController::class, 'create']);
-    Route::get('/projects/{project}', [ProjectController::class, 'show']);
-    Route::get('/projects/{project}/edit', [ProjectController::class, 'edit']);
-    Route::patch('/projects/{project}', [ProjectController::class, 'update']);
-    Route::post('/projects', [ProjectController::class, 'store']);
-
+    Route::resource('projects', ProjectController::class);
     Route::post('/projects/{project}/tasks', [ProjectTaskController::class, 'store']);
     Route::patch('/projects/{project}/tasks/{task}', [ProjectTaskController::class, 'update']);
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::post('/projects/{project}/invitations', [ProjectInvitationController::class, 'store']);
+    Route::get('/home', [ProjectController::class, 'index'])->name('home');
 });
 
 Auth::routes();

@@ -11,7 +11,7 @@ class ProjectController extends Controller
 {
     public function index()
     {
-        return view('projects.index', ['projects' => auth()->user()->projects]);
+        return view('projects.index', ['projects' => auth()->user()->accessibleProjects()]);
     }
 
     public function create()
@@ -43,5 +43,14 @@ class ProjectController extends Controller
         $project->update($request->validated());
 
         return redirect($project->path());
+    }
+
+    public function destroy(Project $project)
+    {
+        $this->authorize('manage', $project);
+
+        $project->delete();
+
+        return redirect('/projects');
     }
 }

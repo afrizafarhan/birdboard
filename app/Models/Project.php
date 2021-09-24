@@ -35,4 +35,14 @@ class Project extends Model
     {
         return $this->tasks()->create($body);
     }
+
+    function invite(User $user)
+    {
+        $this->members()->attach($user);
+    }
+
+    function members()
+    {
+        return $this->belongsToMany(User::class, 'project_members')->withTimestamps();
+    }
 }
