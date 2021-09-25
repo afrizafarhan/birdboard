@@ -3,7 +3,7 @@
 @section('content')
 
     <header class="flex items-center mb-3 py-4">
-        <h2 class="mr-auto text-gray-600 lg:text-lg">My Projects</h2>
+        <h2 class="mr-auto text-muted text-base font-light lg:text-lg">My Projects</h2>
         <a href="/projects/create" class="c-bg-blue text-white font-semibold py-2 px-5 rounded">Add Project</a>
     </header>
     

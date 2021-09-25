@@ -8,7 +8,17 @@ module.exports = {
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: { 
+      backgroundColor: {
+        page: 'var(--page-background-color)',
+        card: 'var(--card-background-color)',
+        button: 'var(--button-background-color)',
+        header: 'var(--header-background-color)'
+      },
+      colors: {
+        default: 'var(--text-default-color)'
+      }
+    },
   },
   variants: {
     extend: {},

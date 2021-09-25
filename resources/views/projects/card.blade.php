@@ -1,8 +1,8 @@
     <div class="card mt-9 flex flex-col" style="height: 200px">
-        <h3 class="font-normal text-xl py-4 -ml-5 mb-3 border-l-4 pl-4 border-blue-300">
-            <a href="{{ $project->path() }}">{{ $project->title }}</a>
+        <h3 class="font-normal text-xl py-4 -ml-5 mb-3 border-l-4 pl-4 border-accent-light">
+            <a class="text-default no-underline" href="{{ $project->path() }}">{{ $project->title }}</a>
         </h3> 
-        <div class="text-gray-400 mb-4 flex-1">
+        <div class="mb-4 flex-1">
             {{ $project->descriptions }}
         </div>
         @can('manage', $project)

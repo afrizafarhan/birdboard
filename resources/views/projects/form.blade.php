@@ -6,7 +6,7 @@
     <div class="control">
         <input
                 type="text"
-                class="input bg-transparent border border-grey-light rounded p-2 text-xs w-full"
+                class="input bg-transparent border border-muted-light rounded p-2 text-xs w-full"
                 name="title"
                 placeholder="My next awesome project"
                 required
@@ -21,7 +21,7 @@
             <textarea
                 name="descriptions"
                 rows="10"
-                class="textarea bg-transparent border border-grey-light rounded p-2 text-xs w-full"
+                class="textarea bg-transparent border border-muted-light rounded p-2 text-xs w-full"
                 placeholder="I should start learning piano."
                 required>{{ $project->descriptions }}</textarea>
     </div>
@@ -29,9 +29,9 @@
 
 <div class="field">
     <div class="control">
-        <button type="submit" class="c-bg-blue text-white font-semibold py-2 px-5 rounded is-link mr-2">{{ $buttonText }}</button>
+        <button type="submit" class="button mr-2">{{ $buttonText }}</button>
 
-        <a href="{{ $project->path() }}">Cancel</a>
+        <a href="{{ $project->path() }}" class="text-default">Cancel</a>
     </div>
 </div>
 
