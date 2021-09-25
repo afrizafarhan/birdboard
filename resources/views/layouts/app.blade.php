@@ -41,19 +41,15 @@
 
                     <div>
                         <!-- Right Side Of Navbar -->
-                        <ul class="navbar-nav ml-auto list-reset">
+                        <div class="flex items-center ml-auto">
                             <!-- Authentication Links -->
                             @guest
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 @if (Route::has('register'))
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                    </li>
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 @endif
                             @else
-                                <li class="nav-item dropdown">
+                                    <theme-switcher></theme-switcher>
                                     <a
                                         class="flex items-center text-default no-underline text-sm"
                                         href="#" role="button"
@@ -68,9 +64,8 @@
 
                                         {{ Auth::user()->name }}
                                     </a>
-                                </li>
                             @endguest
-                        </ul>
+                        </div>
                     </div>
                 </div>
             </div>

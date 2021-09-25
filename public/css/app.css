@@ -586,6 +586,7 @@ body, button {
 
 .button {
   border-radius: 0.5rem;
+  background-color: var(--button-background-color);
   padding-left: 1.25rem;
   padding-right: 1.25rem;
   padding-top: 0.5rem;
@@ -598,6 +599,15 @@ body, button {
 
 .theme-light .button {
   box-shadow: 0 2px 7px 0 #b0eaff;
+}
+
+.button.is-outlined {
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgba(147, 197, 253, var(--tw-border-opacity));
+  background-color: var(--card-background-color);
+  --tw-text-opacity: 1;
+  color: rgba(147, 197, 253, var(--tw-text-opacity));
 }
 
 .theme-dark .button {
@@ -623,11 +633,12 @@ body, button {
   --text-muted-color: rgba(0, 0, 0, 0.3);
   --text-muted-light-color: rgba(255, 255, 255, 0.1);
   --text-muted-light-color: #e1e6e8;
+  --text-error-color: red;
 }
 
 .theme-dark {
   --page-background-color: #17181e;
-  --card-background-color: #1f2027;
+  --card-background-color: #1f2027 !important;
   --button-background-color: #59b6f9;
   --header-background-color: #1f2027;
   --text-default-color: #fff;
@@ -635,6 +646,7 @@ body, button {
   --text-muted-light-color: rgba(255, 255, 255, 0.3);
   --text-accent-color: #47cdff;
   --text-accent-light-color: #8ae2fe;
+  --text-error-color: red;
 }
 
 .sr-only {

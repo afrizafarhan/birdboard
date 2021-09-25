@@ -11,11 +11,15 @@ button {
 }
 
 .button {
-    @apply no-underline rounded-lg text-sm py-2 px-5;
+    @apply bg-button no-underline rounded-lg text-sm py-2 px-5;
     color: white;
 
     .theme-light & {
         box-shadow: 0 2px 7px 0 #b0eaff;
+    }
+
+    &.is-outlined {
+        @apply bg-card border border-blue-300 text-blue-300;
     }
 
     .theme-dark & {
@@ -39,11 +43,12 @@ button {
     --text-muted-color: rgba(0, 0, 0, 0.3);
     --text-muted-light-color: rgba(255, 255, 255, 0.1);
     --text-muted-light-color: #e1e6e8;
+    --text-error-color: red;
 }
 
 .theme-dark {
     --page-background-color: #17181e;
-    --card-background-color: #1f2027;
+    --card-background-color: #1f2027 !important;
     --button-background-color: #59b6f9;
     --header-background-color: #1f2027;
 
@@ -52,5 +57,6 @@ button {
     --text-muted-light-color: rgba(255, 255, 255, 0.3);
     --text-accent-color: #47cdff;
     --text-accent-light-color: #8ae2fe;
+    --text-error-color: red;
 }
 @tailwind utilities;

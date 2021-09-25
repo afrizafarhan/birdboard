@@ -19,5 +19,5 @@ mix.js('resources/js/app.js', 'public/js')
             require('autoprefixer'),
         ]
     }
-)
+).vue()
     .sourceMaps();

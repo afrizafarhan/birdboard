@@ -16,7 +16,7 @@
                 alt="{{ $project->owner->name }}'s avatar"
                 class="rounded-full w-8 mr-2">
 
-                <a href="{{ $project->path().'/edit' }}" class="c-bg-blue text-white font-semibold py-2 px-5 rounded">Edit Project</a>
+                <a href="{{ $project->path().'/edit' }}" class="button">Edit Project</a>
         </div>
 
     </header>
@@ -54,7 +54,7 @@
                         @method('PATCH')
 
                         <textarea class="card w-full mb-4 text-default" name="notes" style="min-height:200px" placeholder="Anything special that you want to make a note off?">{{ $project->notes }}</textarea>
-                        <button class="c-bg-blue text-white font-semibold py-2 px-5 rounded" type="submit">Save</button>
+                        <button class="button" type="submit">Save</button>
                     </form>
 
                     @include('errors')
