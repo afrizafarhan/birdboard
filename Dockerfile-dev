@@ -1,7 +1,7 @@
 FROM php:7.4-fpm-alpine
 
-ARG user
-ARG uid
+ARG user=hans
+ARG uid=1000
 
 RUN apk update && apk add --no-cache --virtual \
     git \
@@ -22,17 +22,10 @@ RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 #Create system user
+RUN addgroup -g "$uid" -S "$user"
 RUN adduser -G www-data $user -D -u $uid -h /home/$user $user
 RUN mkdir -p /home/$user/.composer && \
     chown -R $user:$user /home/$user
-
-RUN composer install
-
-RUN php artisan config:cache
-
-RUN php artisan route:cache
-
-RUN php artisan view:cache
 
 # Set working directory
 WORKDIR /var/www
