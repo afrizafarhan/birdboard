@@ -30,7 +30,7 @@
           </div>
 
           <div class="mb-4">
-            <label for="description" class="text-sm block mb-2"
+            <label for="descriptions" class="text-sm block mb-2"
               >Description</label
             >
 
@@ -40,14 +40,14 @@
               rows="7"
               v-model="form.descriptions"
               :class="
-                form.errors.description ? 'border-error' : 'border-muted-light'
+                form.errors.descriptions ? 'border-error' : 'border-muted-light'
               "
             ></textarea>
 
             <span
               class="text-xs italic text-error"
-              v-if="form.errors.description"
-              v-text="form.errors.description[0]"
+              v-if="form.errors.descriptions"
+              v-text="form.errors.descriptions[0]"
             ></span>
           </div>
         </div>
@@ -124,9 +124,9 @@ import BirdboardForm from './BirdboardForm';
 export default {
   data() {
     return {
-      form: new BirdboadForm({
+      form: new BirdboardForm({
         title: "",
-        description: "",
+        descriptions: "",
         tasks: [{ body: "" }],
       }),
     };
@@ -136,8 +136,9 @@ export default {
       this.form.tasks.push({ body: "" });
     },
     async submit() {
+      console.log(this.form);
       if(!this.form.tasks[0].body) delete this.form.originalData.tasks;
-
+      
       this.form.submit('/projects').then(response => location = response.data.message);
     },
   },

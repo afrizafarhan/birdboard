@@ -1,0 +1,58 @@
+version: "3.7"
+  
+services:
+  app:
+    build:
+      args:
+        user: hans
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile-dev
+    image: birdboard
+    container_name: birdboard-app
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+    networks:
+      - birdboard
+
+  db:
+    image: mysql:5.7
+    container_name: birdboard-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: birdboard
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_PASSWORD: secret
+      MYSQL_USER: hans
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    networks:
+      - birdboard
+
+  nginx:
+    image: nginx:alpine
+    container_name: birdboard-nginx
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d
+    networks:
+      - birdboard
+  npm:
+    build:
+      context: ./
+      dockerfile: npm.dockerfile
+    container_name: nodejs
+    volumes:
+      - ./:/var/www
+    working_dir: /var/www
+    networks:
+      - birdboard
+
+networks:
+  birdboard:
+    driver: bridge

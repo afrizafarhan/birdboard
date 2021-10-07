@@ -15,7 +15,9 @@ class BirdboardForm {
     data(){
         return Object.keys(this.originalData).reduce((data, attribute) => {
             data[attribute] = this[attribute];
-        });
+
+            return data;
+        }, {});
     }
 
     post(endpoint)
